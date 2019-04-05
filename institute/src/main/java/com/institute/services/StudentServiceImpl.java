@@ -18,11 +18,16 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Override
-    public Student createStudent(Student student) {
+    public Student createStudent(Student student) throws Exception {
         if (student == null)
             return null;
         student.setId(null);
-        StudentEntity entity = studentRepository.save(student.retrieveEntity());
+        StudentEntity entity;
+        try {
+             entity = studentRepository.save(student.retrieveEntity());
+        }catch (Exception ex){
+            throw new Exception("unable to create entity");
+        }
         return new Student().retrieveModel(entity);
     }
 
@@ -37,7 +42,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student updateStudent(Student student, Long id) {
+    public Student updateStudent(Student student, Long id) throws Exception {
 
         Optional<StudentEntity> byId = studentRepository.findById(id);
         if (byId == null)
@@ -48,9 +53,16 @@ public class StudentServiceImpl implements StudentService {
         entity.setLastName(newEntity.getLastName());
         entity.setFirstName(newEntity.getFirstName());
         entity.setCourses(newEntity.getCourses());
-        StudentEntity save = studentRepository.save(entity);
+        StudentEntity save;
+        try{
+             save = studentRepository.save(entity);
+        }catch (Exception ex){
+            throw new Exception("unable to update entity");
+         }
+
         if (save == null)
             return null;
+
         return new Student().retrieveModel(save);
     }
 

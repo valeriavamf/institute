@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface StudentService {
 
-    Student createStudent(Student student);
+    Student createStudent(Student student) throws Exception;
 
     List<Student> retrieveAll();
 
-    Student updateStudent(Student student, Long id);
+    Student updateStudent(Student student, Long id) throws Exception;
 
     String deleteStudent(Long studentId);
 

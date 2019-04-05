@@ -23,7 +23,14 @@ public class CoureseServiceImpl implements CourseService {
             return null;
         if (course.getCode() == null)
             throw new Exception ("code cannot be null");
-        CourseEntity entity = courseRepository.save(course.retrieveEntity());
+
+        CourseEntity entity;
+        try {
+            entity  = courseRepository.save(course.retrieveEntity());
+        }catch (Exception ex){
+            throw new Exception("unable to create entity");
+        }
+
         return new Course().retrieveModel(entity);
     }
 
@@ -38,7 +45,7 @@ public class CoureseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course updateCourse(Course course, String id) {
+    public Course updateCourse(Course course, String id) throws Exception {
         Optional<CourseEntity> byId = courseRepository.findById(id);
         if (byId == null)
             return null;
@@ -49,7 +56,14 @@ public class CoureseServiceImpl implements CourseService {
         entity.setTitle(newEntity.getTitle());
         entity.setStudents(newEntity.getStudents());
         entity.setDescription(newEntity.getDescription());
-        CourseEntity save = courseRepository.save(entity);
+        CourseEntity save;
+        try{
+            save = courseRepository.save(entity);
+        }catch (Exception ex){
+            throw new Exception("unable to update entity");
+        }
+
+
         if (save == null)
             return null;
         return new Course().retrieveModel(save);

@@ -10,7 +10,7 @@ public interface CourseService {
 
     List<Course> retrieveAll();
 
-    Course updateCourse(Course course, String id);
+    Course updateCourse(Course course, String id) throws Exception;
 
     String deleteCourse(String studentId);
 
