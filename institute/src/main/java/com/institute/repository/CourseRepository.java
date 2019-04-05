@@ -3,5 +3,8 @@ package com.institute.repository;
 import com.institute.repository.entity.CourseEntity;
 import org.springframework.data.repository.CrudRepository;
 
-public interface CourseRepository  extends CrudRepository<CourseEntity, String> {
+import java.util.List;
+
+public interface CourseRepository  extends CrudRepository<CourseEntity, String>, CourseGenericRepository {
+    List<CourseEntity> findAll();
 }

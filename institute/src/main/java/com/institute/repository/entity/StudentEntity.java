@@ -10,19 +10,19 @@ public class StudentEntity {
 
     @Id
     private long id;
-    @Column(name="lastName")
+
+    @Column(name="last_name")
     private String lastName;
-    @Column(name="firstName")
+
+    @Column(name="first_name")
     private String firstName;
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.ALL
-            })
+
+    @ManyToMany
     @JoinTable(
             name = "course_student",
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private List<CourseEntity> subjects;
+    private List<CourseEntity> courses;
 
     public long getId() {
         return id;
@@ -48,11 +48,11 @@ public class StudentEntity {
         this.firstName = firstName;
     }
 
-    public List<CourseEntity> getSubjects() {
-        return subjects;
+    public List<CourseEntity> getCourses() {
+        return courses;
     }
 
-    public void setSubjects(List<CourseEntity> subjects) {
-        this.subjects = subjects;
+    public void setCourses(List<CourseEntity> subjects) {
+        this.courses = subjects;
     }
 }

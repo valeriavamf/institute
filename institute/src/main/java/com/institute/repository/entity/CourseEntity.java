@@ -12,10 +12,7 @@ public class CourseEntity {
     private String title;
     @Column(name="description")
     private String description;
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.ALL
-            })
+    @ManyToMany
     @JoinTable(
             name = "course_student",
             joinColumns = @JoinColumn(name = "course_id"),

@@ -8,7 +8,7 @@ public interface StudentService {
 
     Student createStudent(Student student);
     List<Student> retrieveAll();
-    Student updateStudent(Student student);
-    Student deleteStudent(Long studentId);
+    Student updateStudent(Student student, Long id);
+    String deleteStudent(Long studentId);
     List<Student> findStudent(Long studentId, String lastName, String firstName);
 }
