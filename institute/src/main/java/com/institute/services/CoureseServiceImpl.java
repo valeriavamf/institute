@@ -59,13 +59,13 @@ public class CoureseServiceImpl implements CourseService {
     public String deleteCourse(String studentId) {
         Optional<CourseEntity> byId = courseRepository.findById(studentId);
         if (byId == null)
-            return "student not founnd";
+            return "course not founnd";
         try{
             courseRepository.deleteById(studentId);
         }catch (Exception ex){
             return ex.getMessage();
         }
-        return "student deleted";
+        return "course deleted";
     }
 
     @Override
