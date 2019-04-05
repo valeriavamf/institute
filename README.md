@@ -32,6 +32,8 @@ OR Run the dump.sql file
 
 - Programing: Use Spring boot and Spring Data in order to create the rest service and manage the database conection. This framework provides a simple way to solve the problem. With spring create rest service is very simple and using String Data manage the relation from students and courses.
 
+- Strucutre: The project implements MVC. Also the use of interfaces to keep low coupling and high cohesion.
+
 - Test: Create unit test using Junit and Mockito.
 
 # Services
