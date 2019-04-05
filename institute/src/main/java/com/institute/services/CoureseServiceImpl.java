@@ -5,6 +5,7 @@ import com.institute.repository.CourseRepository;
 import com.institute.repository.entity.CourseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,10 +69,24 @@ public class CoureseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> findCourse(String code, String title, String description) {
+    public List<Course> findCourse( String code, String title, String description) {
         List<Course> result = new ArrayList<>();
 
         List<CourseEntity> studentEntities = courseRepository.retrieveCourses(code, title, description);
+
+        if (studentEntities == null)
+            return result;
+
+        studentEntities.forEach(entity -> result.add(new Course().retrieveModel(entity)));
+
+        return result;
+    }
+
+    @Override
+    public List<Course> findCourseByStudent(Long id, String lastName, String firstName) {
+        List<Course> result = new ArrayList<>();
+
+        List<CourseEntity> studentEntities = courseRepository.retrieveCourseByStudents(id, firstName, lastName);
 
         if (studentEntities == null)
             return result;

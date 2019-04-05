@@ -44,8 +44,14 @@ public class InstituteControllerImpl implements InstituteController{
 
     @Override
     @GetMapping("/students")
-    public List<Student> retrieveStudents(Long id, String firstName, String lastName) throws Exception {
-        return null;
+    public List<Student> retrieveStudents(  Long id,  String firstName, String lastName) throws Exception {
+        return studentService.findStudent(id,lastName,firstName);
+    }
+
+    @Override
+    @GetMapping("/student/courses")
+    public List<Student> retrieveStudentsByCourse(String code,String title,String description) throws Exception {
+        return studentService.findStudentsByCourse(code,title,description);
     }
 
     @Override
@@ -74,8 +80,14 @@ public class InstituteControllerImpl implements InstituteController{
 
     @Override
     @GetMapping("/courses")
-    public List<Course> retrieveCourse(String code, String title, String description) throws Exception {
+    public List<Course> retrieveCourse( String code,  String title,  String description) throws Exception {
         return courseService.findCourse(code,title,description);
+    }
+
+    @Override
+    @GetMapping("/courses/student")
+    public List<Course> retrieveCourseByStudent( Long id,  String firstName,  String lastName) throws Exception {
+        return courseService.findCourseByStudent(id,lastName,firstName);
     }
 
 }

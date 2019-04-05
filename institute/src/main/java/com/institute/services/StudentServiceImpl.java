@@ -81,4 +81,19 @@ public class StudentServiceImpl implements StudentService {
 
         return result;
     }
+
+    @Override
+    public List<Student> findStudentsByCourse(String code, String title, String description) {
+
+        List<Student> result = new ArrayList<>();
+
+        List<StudentEntity> studentEntities = studentRepository.retrieveStudentsByCourse(code, title, description);
+
+        if (studentEntities == null)
+            return result;
+
+        studentEntities.forEach(entity -> result.add(new Student().retrieveModel(entity)));
+
+        return result;
+    }
 }
