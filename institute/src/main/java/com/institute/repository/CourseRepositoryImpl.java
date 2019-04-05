@@ -55,7 +55,7 @@ public class CourseRepositoryImpl implements CourseGenericRepository{
     public List<CourseEntity> retrieveCourseByStudents(Long id, String firstName, String lastName) {
         List<CourseEntity> result = new ArrayList<>();
         StringBuilder sql = new StringBuilder("select c.* from course c, student s, course_student cs where " +
-                "cs.course_id = c.code and s.id = cs.student_id and");
+                "cs.student_id = s.id and cs.course_id = c.code and");
 
         if (id == null && firstName == null && lastName == null)
             return result;
@@ -72,7 +72,7 @@ public class CourseRepositoryImpl implements CourseGenericRepository{
         int index = sql.lastIndexOf("and");
         sql.replace(index,sql.length(),"");
 
-        Query query = em.createNativeQuery(sql.toString(), StudentEntity.class);
+        Query query = em.createNativeQuery(sql.toString(), CourseEntity.class);
 
         if (id != null)
             query.setParameter("id",id);
